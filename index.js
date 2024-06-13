@@ -11,6 +11,11 @@ const songs = [
     { title: "Come and Get Your Love", artist: "Redbone", genre: "Rock" },
     { title: "I'm Not in Love", artist: "10cc", genre: "Pop" },
     { title: "Fooled Around and Fell in Love", artist: "Elvin Bishop", genre: "Rock" },
+    { title: "Emo girl", artist: "MGK", genre: "Punk" },
+    { title: "Natives", artist: "Blink-182", genre: "Punk" },
+    { title: "Wonderland", artist: "Taylor Swift", genre: "Pop" },
+    { title: "Feline", artist: "Juice WRLD", genre: "Trap" },
+    { title: "Moonlight", artist: "XXTentation", genre: "Emo Rap" },
     // Feel free to add even more songs
 ];
 
@@ -19,6 +24,9 @@ const songs = [
 const guardians = {
     "Star-Lord": "Rock",
     "Gamora": "Pop",
+    "Drax": "R&B",
+    "Rocket": "Punk",
+    "Groot": "Punk"
     // Add preferences for Drax, Rocket, and Groot
 };
 
@@ -26,9 +34,33 @@ const guardians = {
 function generatePlaylist(guardians, songs) {
     // Use the map() function to create playlists for each Guardian
     // Your code here
+  
+ const playList = document.getElementById("playlists");
+  Object.entries(guardians).forEach(([guardian,preference]) => {
+    
+ const mixDiv = document.createElement("div");
+  const mixHeader = document.createElement("h3");
+  mixHeader.textContent = `${guardian}` +"'s" + " Playlist";
+    
+    const mixUlList = document.createElement("ul");
+    const mixList = document.createElement("li");
+   
+    mixDiv.appendChild(mixHeader);
+    mixDiv.appendChild(mixUlList)
+    mixUlList.appendChild(mixList)
+     playList.appendChild(mixDiv)
+    
+   const obj = songs.filter(song => song.genre === `${preference}`);
+    
+    const objectValue = obj.map(findSongs)
+    
+    function findSongs(song){
+      return [song.title,song.artist].join(" by ")
+    }
+    mixList.textContent = objectValue;
+   
+  })
+ 
 }
 
-// Call generatePlaylist and display the playlists for each Guardian
 generatePlaylist(guardians, songs);
-
-
